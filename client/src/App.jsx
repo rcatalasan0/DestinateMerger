@@ -1,9 +1,9 @@
-import { useEffect, useState }from "react";
+import { useEffect, useState } from "react";
 import { Switch, Route, Link, useLocation } from "wouter";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Toaster } from "@/components/ui/toaster";
-import{ supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/supabaseClient";
 import { MapDialog } from "@/components/MapDialog";
 import Home from "@/pages/Home";
 import Forum from "@/pages/Forum";
@@ -13,6 +13,9 @@ import ForgotPassword from "@/pages/ForgotPassword";
 import ItinerariesPage from "@/pages/ItinerariesPage";
 import CreateItineraryPage from "@/pages/CreateItineraryPage";
 import ItineraryDetailPage from "@/pages/ItineraryDetailPage";
+import StocksPage from "@/pages/StocksPage"; // NEW: Import Stocks page
+import LoginPage from "@/pages/LoginPage";
+
 
 function Router({ onOpenMap }) {
   return (
@@ -25,7 +28,8 @@ function Router({ onOpenMap }) {
       <Route path="/itineraries" component={ItinerariesPage} />
       <Route path="/itineraries/create" component={CreateItineraryPage} />
       <Route path="/itineraries/:id" component={ItineraryDetailPage} />
-      <Route path="/stock-management"/>
+      <Route path="/stocks-predictor" component={StocksPage} /> {/* NEW: Stocks route */}
+      <Route path="/login" component={LoginPage} />
       {/* Future routes can be added here */}
     </Switch>
   );
@@ -79,6 +83,32 @@ export default function App() {
                 Destinate
               </span>
             </Link>
+
+            {/* Navigation Links */}
+            <nav className="hidden md:flex items-center gap-6">
+              <Link href="/">
+                <span className="text-sm font-medium text-foreground hover:text-primary cursor-pointer transition-colors">
+                  Home
+                </span>
+              </Link>
+              <Link href="/itineraries">
+                <span className="text-sm font-medium text-foreground hover:text-primary cursor-pointer transition-colors">
+                  Destinations
+                </span>
+              </Link>
+              <Link href="/forum">
+                <span className="text-sm font-medium text-foreground hover:text-primary cursor-pointer transition-colors">
+                  Forum
+                </span>
+              </Link>
+              <a
+  href="http://127.0.0.1:5000/login"
+  className="text-sm font-medium text-foreground hover:text-primary cursor-pointer transition-colors"
+>
+  Stocks
+</a>
+
+            </nav>
 
             <div className="flex items-center gap-4">
               <ThemeToggle />
